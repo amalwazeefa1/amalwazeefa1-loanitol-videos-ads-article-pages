@@ -494,18 +494,45 @@
         var searchIcon1 = document.getElementById('search-icon1');
         var searchInput1 = document.getElementById('search-input1');
         if (searchIcon1 && searchInput1) {
+            // Ensure both have transitions
+            searchIcon1.style.transition = 'width 0.3s ease, height 0.3s ease';
+            searchInput1.style.transition = 'width 0.3s ease, opacity 0.3s ease';
+
             searchIcon1.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (searchInput1.style.display === 'none' || searchInput1.style.display === '') {
+                const isVisible = searchInput1.style.display === 'block';
+                if (!isVisible) {
+                    // Show input and animate icon larger
                     searchInput1.style.display = 'block';
+                    searchInput1.style.opacity = '0';
+                    searchInput1.style.width = '0px';
+                    setTimeout(function() {
+                        searchInput1.style.opacity = '1';
+                        searchInput1.style.width = '200px';
+                    }, 10);
+                    searchIcon1.style.width = '40px';
+                    searchIcon1.style.height = '40px';
                     searchInput1.focus();
                 } else {
-                    searchInput1.style.display = 'none';
+                    // Animate input hiding and icon smaller
+                    searchInput1.style.opacity = '0';
+                    searchInput1.style.width = '0px';
+                    searchIcon1.style.width = '30px';
+                    searchIcon1.style.height = '30px';
+                    setTimeout(function() {
+                        searchInput1.style.display = 'none';
+                    }, 300);
                 }
             });
             document.addEventListener('click', function(e) {
                 if (!searchIcon1.contains(e.target) && !searchInput1.contains(e.target)) {
-                    searchInput1.style.display = 'none';
+                    searchInput1.style.opacity = '0';
+                    searchInput1.style.width = '0px';
+                    searchIcon1.style.width = '30px';
+                    searchIcon1.style.height = '30px';
+                    setTimeout(function() {
+                        searchInput1.style.display = 'none';
+                    }, 300);
                 }
             });
         }
@@ -515,19 +542,42 @@
         var searchIcon2 = document.getElementById('search-icon2');
         var searchInput2 = document.getElementById('search-input2');
         if (searchIcon2 && searchInput2) {
+            searchIcon2.style.transition = 'width 0.3s ease, height 0.3s ease';
+            searchInput2.style.transition = 'width 0.3s ease, opacity 0.3s ease';
+
             searchIcon2.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (searchInput2.style.display === 'none' || searchInput2.style.display === '') {
+                const isVisible = searchInput2.style.display === 'block';
+                if (!isVisible) {
                     searchInput2.style.display = 'block';
+                    searchInput2.style.opacity = '0';
+                    searchInput2.style.width = '0px';
+                    setTimeout(function() {
+                        searchInput2.style.opacity = '1';
+                        searchInput2.style.width = '200px';
+                    }, 10);
+                    searchIcon2.style.width = '40px';
+                    searchIcon2.style.height = '40px';
                     searchInput2.focus();
                 } else {
-                    searchInput2.style.display = 'none';
+                    searchInput2.style.opacity = '0';
+                    searchInput2.style.width = '0px';
+                    searchIcon2.style.width = '30px';
+                    searchIcon2.style.height = '30px';
+                    setTimeout(function() {
+                        searchInput2.style.display = 'none';
+                    }, 300);
                 }
             });
-            // Hide input when clicking outside
             document.addEventListener('click', function(e) {
                 if (!searchIcon2.contains(e.target) && !searchInput2.contains(e.target)) {
-                    searchInput2.style.display = 'none';
+                    searchInput2.style.opacity = '0';
+                    searchInput2.style.width = '0px';
+                    searchIcon2.style.width = '30px';
+                    searchIcon2.style.height = '30px';
+                    setTimeout(function() {
+                        searchInput2.style.display = 'none';
+                    }, 300);
                 }
             });
         }
@@ -553,66 +603,6 @@
             });
         }
 
-        var searchInput2 = document.getElementById('search-input2');
-        if (searchInput2) {
-            // Animate on focus
-            searchInput2.addEventListener('focus', function() {
-                this.style.transition = 'width 0.3s ease'; // Smooth animation
-                this.style.width = '200px';
-            });
-            // Animate on blue (when input loses focus)
-            searchInput2.addEventListener('blur', function() {
-                if (this.value === '') {
-                    this.style.width = '0';
-                }
-            });
-
-            // Animate on mouse release (useful if click triggers other behaviors)
-            searchInput2.addEventListener('mouseup', function() {
-                this.style.transition = 'width 0.3s ease';
-                this.style.width = '200px';
-            });
-        }
-
-        // Search icon animation for search-icon1
-        var searchIcon1 = document.getElementById('search-icon1');
-        var searchInput1 = document.getElementById('search-input1');
-
-        if (searchIcon1 && searchInput1) {
-            searchIcon1.style.transition = 'width 0.3s ease, height 0.3s ease';
-            searchIcon1.addEventListener('click', function() {
-                const isVisible = window.getComputedStyle(searchInput1).display === 'block';
-
-                if (isVisible) {
-                    searchIcon1.style.width = '30px';
-                    searchIcon1.style.height = '30px';
-                } else {
-                    searchIcon1.style.width = '40px';
-                    searchIcon1.style.height = '40px';
-                }
-            });
-        }
-
-        // Search icon animation for search-icon2
-        var searchIcon2 = document.getElementById('search-icon2');
-
-        if (searchIcon2) {
-            searchIcon2.style.transition = 'width 0.3s ease, height 0.3s ease';
-
-            let toggled = false;
-
-            searchIcon2.addEventListener('click', function() {
-                toggled = !toggled;
-
-                if (toggled) {
-                    searchIcon2.style.width = '40px';
-                    searchIcon2.style.height = '40px';
-                } else {
-                    searchIcon2.style.width = '30px';
-                    searchIcon2.style.height = '30px';
-                }
-            });
-        }
 
 
 
